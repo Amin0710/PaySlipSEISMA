@@ -1,4 +1,4 @@
-package com.amin.PaySlipSEISMA;
+package com.amin.PaySlipSeisma;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

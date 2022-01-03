@@ -1,4 +1,4 @@
-package com.amin.PaySlipSEISMA;
+package com.amin.PaySlipSeisma;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
