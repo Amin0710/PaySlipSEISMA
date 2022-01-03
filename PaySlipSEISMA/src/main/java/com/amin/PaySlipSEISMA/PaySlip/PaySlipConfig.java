@@ -1,5 +1,6 @@
 package com.amin.PaySlipSeisma.PaySlip;
 
+//import com.amin.PaySlipSeisma.ResultPaySlip.ResultPaySlip;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,12 @@ public class PaySlipConfig
                     1,
                     0.09
             );
+//            ResultPaySlip result_david_ruud = new ResultPaySlip(
+//                    250,
+//                    525,
+//                    525,
+//                    26
+//            );
             PaySlip ryan_chen = new PaySlip(
                     "Ryan",
                     "Chen",
@@ -28,6 +35,11 @@ public class PaySlipConfig
                     1,
                     0.1
             );
+//            ResultPaySlip result_ryan_chen= new ResultPaySlip(
+//                    250,
+//                    525,
+//                    525,
+//                    26);
             repository.saveAll(
                     List.of(david_ruud, ryan_chen)
             );
