@@ -1,7 +1,14 @@
 package com.amin.PaySlipSeisma.PaySlip;
 
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+import java.time.Month;
+import java.util.Calendar;
 
 
 @Entity
@@ -19,11 +26,24 @@ public class PaySlip
             generator = "paySlip_sequence"
     )
     private long id;
+    @NotBlank(message = "firstName is mandatory")
+    @Size(min = 2)
     private String firstName;
+    @NotBlank(message = "lastName is mandatory")
+    @Size(min = 2)
     private String lastName;
+    @NotBlank(message = "annualSalary is mandatory")
+    @Positive
     private Integer annualSalary;
+    @NotBlank(message = "paymentMonth is mandatory")
+    @Range(min = 1,max = 12)
     private Integer paymentMonth;
+    @NotBlank(message = "superRate is mandatory")
     private Double superRate;
+    @Transient
+    private String fromDate;
+    @Transient
+    private String toDate;
     @Transient
     private Integer grossIncome;
     @Transient
@@ -89,6 +109,52 @@ public class PaySlip
 
     public void setSuperRate(Double superRate) {
         this.superRate = superRate;
+    }
+
+    public String getFromDate()
+    {
+        int x = this.getPaymentMonth();
+        return ("01 " + Month.of(x));
+    }
+
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public String getToDate() {
+        int x = this.getPaymentMonth();
+        int y=30;
+        if (x==1||x==3||x==5||x==7||x==8||x==10||x==12)
+        {
+            y=31;
+        }else if (x==2)
+        {
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            boolean leap = false;
+
+            if (year % 4 == 0) // if the year is divided by 4
+            {
+                if (year % 100 == 0) // if the year is century
+                {
+                    if (year % 400 == 0) // then it is a leap year// if year is divided by 400
+                        leap = true;
+                    else
+                        leap = false;
+                }
+                else
+                    leap = true;// if the year is not century
+            }
+            else
+                leap = false;
+
+            if (leap){y=29;}else{y=28;}
+
+        }
+        return (y+" " + Month.of(x));
+    }
+
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
     }
 
     public Integer getGrossIncome()
@@ -158,10 +224,12 @@ public class PaySlip
     @Override
     public String toString() {
         return "PaySlip{" +
-                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", paymentMonth=" + paymentMonth +
+                ", superRate=" + superRate +
+                ", fromDate='" + fromDate + '\'' +
+                ", toDate='" + toDate + '\'' +
                 ", grossIncome=" + grossIncome +
                 ", incomeTax=" + incomeTax +
                 ", superannuation=" + superannuation +
