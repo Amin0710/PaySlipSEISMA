@@ -1,12 +1,12 @@
 package com.amin.PaySlipSeisma.PaySlip;
 
 
-import org.hibernate.validator.constraints.Range;
+//import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+//import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.Positive;
+//import javax.validation.constraints.Size;
 import java.time.Month;
 import java.util.Calendar;
 
@@ -26,19 +26,19 @@ public class PaySlip
             generator = "paySlip_sequence"
     )
     private long id;
-    @NotBlank(message = "firstName is mandatory")
-    @Size(min = 2)
+//    @NotBlank(message = "firstName is mandatory")
+//    @Size(min = 2)
     private String firstName;
-    @NotBlank(message = "lastName is mandatory")
-    @Size(min = 2)
+//    @NotBlank(message = "lastName is mandatory")
+//    @Size(min = 2)
     private String lastName;
-    @NotBlank(message = "annualSalary is mandatory")
-    @Positive
+//    @NotBlank(message = "annualSalary is mandatory")
+//    @Positive
     private Integer annualSalary;
-    @NotBlank(message = "paymentMonth is mandatory")
-    @Range(min = 1,max = 12)
+//    @NotBlank(message = "paymentMonth is mandatory")
+//    @Range(min = 1,max = 12)
     private Integer paymentMonth;
-    @NotBlank(message = "superRate is mandatory")
+//    @NotBlank(message = "superRate is mandatory")
     private Double superRate;
     @Transient
     private String fromDate;
